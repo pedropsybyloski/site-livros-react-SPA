@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Livro from './Livro';
 import NotFound from './NotFound';
 
 export default function Frontend({livros}) {
+  const { title } = useParams();
+
   return (
     <>
       {livros.filter(cat => cat.categoria === 'frontend')
@@ -15,11 +17,11 @@ export default function Frontend({livros}) {
           <div className='detalhes'>
             <h3>{livro.titulo}</h3>
             <p>{livro.descricao.length > 110 ? livro.descricao.slice(0, 110).concat('...') : livro.descricao}</p>
-            <span><Link to={`/livro/${livro.slug}`} onClick={value => { //${livro.slug}
-              const livro = data.find(livro => value.match.params.livroSlug === livro.slug); //livro.slug === li.match.params.id
+            <div><Link to={`/livro/${livro.slug}`} onClick={value => { //${livro.slug}
+              const livro = livros.find(livro => title === livro.slug); //livro.slug === li.match.params.id
               if (livro) return <Livro livro={livro} />
               else return <NotFound />
-            }}>Leia mais &gt;</Link></span>
+            }}>Leia mais &gt;</Link></div>
           </div>
         </div>
       ))}
